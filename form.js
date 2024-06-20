@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const lastName = document.getElementById("lastName");
   const email = document.getElementById("email");
   const password = document.getElementById("password");
-  const checkboxes = document.querySelectorAll('input[type="checkbox"][name="preferences"]');
-  
+  const check = document.getElementById("check")
+
   const setError = (element, message) => {
     const inputControl = element.parentElement;
     const errorDisplay = inputControl.querySelector(".error");
@@ -42,22 +42,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const signup = (e) => {
     e.preventDefault();
     validateInputs();
-    validateCheckboxes();
 
-    if (form.querySelectorAll(".success").length === 5) {
+    if (form.querySelectorAll(".success").length === 4) {
       const firstNameValue = firstName.value;
       const lastNameValue = lastName.value;
       const emailValue = email.value;
       const passwordValue = password.value;
 
-      const selectedCheckboxes = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.nextSibling.textContent.trim());
-      
       const values = {
         firstName: firstNameValue,
         lastName: lastNameValue,
         email: emailValue,
-        password: passwordValue,
-        preferences: selectedCheckboxes
+        password: passwordValue
       };
 
       console.log(values);
@@ -69,6 +65,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const lastNameValue = lastName.value.trim();
     const emailValue = email.value.trim();
     const passwordValue = password.value.trim();
+    let isChecked = false;
+
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        isChecked = true;
+      }
+    });
+
+    if (!isChecked) {
+      const subscriptionDiv = document.querySelector(".subs");
+      const errorDisplay = subscriptionDiv.querySelector(".error");
+      errorDisplay.innerText = "Please select at least one subscription preference";
+      subscriptionDiv.classList.add("error");
+    } else {
+      const subscriptionDiv = document.querySelector(".subs");
+      const errorDisplay = subscriptionDiv.querySelector(".error");
+      errorDisplay.innerText = "";
+      subscriptionDiv.classList.remove("error");
+    }
 
     if (firstNameValue === "") {
       setError(firstName, "First name is required");
@@ -100,19 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
       setError(password, "Minimum 8 characters, at least one uppercase letter, one lowercase letter, one of these special characters (!@#$%^&*) and one number");
     } else {
       setSuccess(password);
-    }
-  };
-
-  const validateCheckboxes = () => {
-    const checked = Array.from(checkboxes).some(cb => cb.checked);
-    if (!checked) {
-      const subscriptionError = document.querySelector('.subs .error');
-      subscriptionError.innerText = "Please select at least one subscription preference";
-      document.querySelector('.subs .inputs').classList.add("error");
-    } else {
-      const subscriptionError = document.querySelector('.subs .error');
-      subscriptionError.innerText = "";
-      document.querySelector('.subs .inputs').classList.remove("error");
     }
   };
 
