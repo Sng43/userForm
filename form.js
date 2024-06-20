@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const email = document.getElementById("email");
   const password = document.getElementById("password");
   const checks = document.querySelectorAll('[type="checkbox"]');
-
+// Display error
   const setError = (element, message) => {
     const inputControl = element.parentElement;
     const errorDisplay = inputControl.querySelector(".error");
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return pattern.test(String(email).toLowerCase());
   };
-
+// Password Validation
   const isValidPassword = (password) => {
     const pattern = /(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
     return pattern.test(String(password));
