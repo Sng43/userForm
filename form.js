@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const lastName = document.getElementById("lastName");
   const email = document.getElementById("email");
   const password = document.getElementById("password");
+  const checks = document.querySelectorAll('[type="checkbox"]');
 
   const setError = (element, message) => {
     const inputControl = element.parentElement;
@@ -40,9 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const signup = (e) => {
     e.preventDefault();
-    validateInputs();
-
-    if (form.querySelectorAll(".success").length === 4) {
+    if (validateInputs() && validateChecks()) {
       const firstNameValue = firstName.value;
       const lastNameValue = lastName.value;
       const emailValue = email.value;
@@ -52,19 +51,26 @@ document.addEventListener('DOMContentLoaded', () => {
         firstName: firstNameValue,
         lastName: lastNameValue,
         email: emailValue,
-        password: passwordValue
+        password: passwordValue,
+        preferences: getSelectedCheckboxes()
       };
 
-      let values = JSON.parse(localStorage.getItem("subscribers")) || [];
-      
-      values.push(newValues);
-      
-      localStorage.setItem("subscribers", JSON.stringify(values));
-      console.log(values);
+      let subscribers = JSON.parse(localStorage.getItem("subscribers")) || [];
+      subscribers.push(newValues);
+      localStorage.setItem("subscribers", JSON.stringify(subscribers));
+
+      console.log("New user added:", newValues);
+
+      // Clear form after successful submission (optional)
+      form.reset();
+    } else {
+      console.log("Form validation failed.");
     }
   };
 
   const validateInputs = () => {
+    let isValid = true;
+
     const firstNameValue = firstName.value.trim();
     const lastNameValue = lastName.value.trim();
     const emailValue = email.value.trim();
@@ -72,35 +78,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (firstNameValue === "") {
       setError(firstName, "First name is required");
+      isValid = false;
     } else if (!isValidName(firstNameValue)) {
       setError(firstName, "Provide a valid name");
+      isValid = false;
     } else {
       setSuccess(firstName);
     }
 
     if (lastNameValue === "") {
       setError(lastName, "Last name is required");
+      isValid = false;
     } else if (!isValidName(lastNameValue)) {
       setError(lastName, "Provide a valid name");
+      isValid = false;
     } else {
       setSuccess(lastName);
     }
 
     if (emailValue === "") {
       setError(email, "Email is required");
+      isValid = false;
     } else if (!isValidEmail(emailValue)) {
       setError(email, "Provide a valid email address");
+      isValid = false;
     } else {
       setSuccess(email);
     }
 
     if (passwordValue === "") {
       setError(password, "Password is required");
+      isValid = false;
     } else if (!isValidPassword(passwordValue)) {
       setError(password, "Minimum 8 characters, at least one uppercase letter, one lowercase letter, one of these special characters (!@#$%^&*) and one number");
+      isValid = false;
     } else {
       setSuccess(password);
     }
+
+    return isValid;
+  };
+
+  const validateChecks = () => {
+    const checked = Array.from(checks).some(cb => cb.checked);
+    const subscriptionError = document.querySelector('.subs .error');
+
+    if (!checked) {
+      subscriptionError.innerText = "Please select at least one subscription preference";
+      document.querySelector('.subs .inputs').classList.add("error");
+      return false;
+    } else {
+      subscriptionError.innerText = "";
+      document.querySelector('.subs .inputs').classList.remove("error");
+      return true;
+    }
+  };
+
+  const getSelectedCheckboxes = () => {
+    const selectedCheckboxes = Array.from(checks)
+      .filter(cb => cb.checked)
+      .map(cb => cb.value);
+    return selectedCheckboxes;
   };
 
   form.addEventListener("submit", signup);
