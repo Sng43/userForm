@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const lastName = document.getElementById("lastName");
   const email = document.getElementById("email");
   const password = document.getElementById("password");
-  const check = document.getElementById("check")
 
   const setError = (element, message) => {
     const inputControl = element.parentElement;
@@ -49,16 +48,19 @@ document.addEventListener('DOMContentLoaded', () => {
       const emailValue = email.value;
       const passwordValue = password.value;
 
-      const values = {
+      const newValues = {
         firstName: firstNameValue,
         lastName: lastNameValue,
         email: emailValue,
         password: passwordValue
       };
 
-      const val = JSON.stringify(val);
-      localStorage.setItem("values", val)
-      console.log(val)
+      let values = JSON.parse(localStorage.getItem("subscribers")) || [];
+      
+      values.push(newValues);
+      
+      localStorage.setItem("subscribers", JSON.stringify(values));
+      console.log(values);
     }
   };
 
@@ -67,7 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const lastNameValue = lastName.value.trim();
     const emailValue = email.value.trim();
     const passwordValue = password.value.trim();
-    
 
     if (firstNameValue === "") {
       setError(firstName, "First name is required");
