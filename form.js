@@ -56,7 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
         password: passwordValue
       };
 
-      console.log(values);
+      const val = JSON.stringify(val);
+      localStorage.setItem("values", val)
+      console.log(val)
     }
   };
 
@@ -65,25 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const lastNameValue = lastName.value.trim();
     const emailValue = email.value.trim();
     const passwordValue = password.value.trim();
-    let isChecked = false;
-
-    checkboxes.forEach((checkbox) => {
-      if (checkbox.checked) {
-        isChecked = true;
-      }
-    });
-
-    if (!isChecked) {
-      const subscriptionDiv = document.querySelector(".subs");
-      const errorDisplay = subscriptionDiv.querySelector(".error");
-      errorDisplay.innerText = "Please select at least one subscription preference";
-      subscriptionDiv.classList.add("error");
-    } else {
-      const subscriptionDiv = document.querySelector(".subs");
-      const errorDisplay = subscriptionDiv.querySelector(".error");
-      errorDisplay.innerText = "";
-      subscriptionDiv.classList.remove("error");
-    }
+    
 
     if (firstNameValue === "") {
       setError(firstName, "First name is required");
