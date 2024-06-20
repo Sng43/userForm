@@ -9,7 +9,7 @@ form {
 }
 
 h1 {
-    padding: none;
+    padding: 0;
     text-align: center;
 }
 h1, label, legend {
@@ -70,7 +70,6 @@ h1, label, legend {
 
 button {
     display: block;
-    width: 60%;
     margin: 30px auto;
     height: 2em;
     font-size: 20px;
