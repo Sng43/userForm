@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Sign Up</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="form.css" rel="stylesheet" />
+</head>
+    <body>
+            <form id="form"  onsubmit="signup()">
+                    <h1>Newsletter Subscription Form</h1>
+                <div class="input-control">
+                    <label for="firstName">First Name</label>
+                    <input id="firstName" name="firstName" type="text" placeholder="Enter you first name">
+                    <div class="error"></div>
+                </div>
+                <div class="input-control">
+                    <label for="lastName">Last Name</label>
+                    <input id="lastName" name="lastName" type="text" placeholder="Enter you last name">
+                    <div class="error"></div>
+                </div>
+                <div class="input-control">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="text" placeholder="Enter your Email address"> 
+                    <div class="error"></div>
+                </div>
+                <div class="subs">
+                        <legend>Subscription preferences</legend>
+                        <div class="inputs">
+                            <label for="check1"><input id="check1" type="checkbox" name="preferences"/> Technology</label>
+                            <label for="check2"><input id="check2" type="checkbox" name="preferences"/> Health</label>
+                            <label for="check3"><input id="check3" type="checkbox" name="preferences"/> Finance</label>
+                            <div class="error"></div>
+                        </div>
+                </div>
+                <div class="input-control">
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" placeholder="Enter your password">
+                    <div class="error"></div>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+        <script src="form.js"></script>
+    </body>
+</html>

@@ -1,0 +1,78 @@
+body {
+    background: linear-gradient(45deg, rgb(11, 11, 72),rgb(30, 34, 107), rgb(32, 33, 106));
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+form {
+    width: 400px;
+    margin: auto;
+    padding: 30px;
+}
+
+h1 {
+    padding: none;
+    text-align: center;
+}
+h1, label, legend {
+    background-image: linear-gradient(-45deg, rgb(181, 116, 30),rgb(172, 106, 31), rgb(155, 86, 16));
+    -webkit-background-clip: text;
+     color: transparent;
+}
+.input-control{
+    display: block;
+    margin-bottom: 5px;
+    font-size: 17px;
+}
+
+.input-control label {
+    text-align: center;
+}
+.subs label {
+    display: block;
+    /* border: solid 1px white; */
+    
+}
+
+.inputs {
+    margin: 10px;
+    /* border: solid 1px white; */
+    display: block;   
+}
+.inputs label{
+    margin: 8px;
+    display: block;
+
+}
+
+.input-control input {
+    border: 2px solid #f0f0f0;
+    margin-top: 10px ;
+	border-radius: 4px;
+	display: block;
+	font-size: 12px;
+	padding: 10px 3px;
+	width: 100%;
+    padding-left: 10px;
+}
+
+.input-control.success input {
+    border-color: #09c372;
+}
+
+.input-control.error input {
+    border-color: #ff3860;
+}
+
+.input-control .error {
+    color: #ff3860;
+    font-size: 12px;
+    height: 13px;
+}
+
+button {
+    display: block;
+    width: 60%;
+    margin: 30px auto;
+    height: 2em;
+    font-size: 20px;
+    width: 300px;
+}
