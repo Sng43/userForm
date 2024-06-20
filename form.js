@@ -59,9 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
       subscribers.push(newValues);
       localStorage.setItem("subscribers", JSON.stringify(subscribers));
 
-      console.log("New user added:", newValues);
-
-      // Clear form after successful submission (optional)
+      console.log("New subscriber:", newValues);
       form.reset();
     } else {
       console.log("Form validation failed.");
